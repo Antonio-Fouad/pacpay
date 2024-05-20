@@ -5,4 +5,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class CustomerRepository implements PanacheRepositoryBase<Customer, Long> {
+
+    public Customer findByCpf(String cpf){
+        return find("cpf", cpf).firstResult();
+    }
 }
