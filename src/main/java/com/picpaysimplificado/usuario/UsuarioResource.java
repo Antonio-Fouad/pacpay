@@ -1,24 +1,22 @@
-package com.picpaysimplificado.customer;
+package com.picpaysimplificado.usuario;
 
 import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
-import org.jboss.resteasy.reactive.RestResponse;
 
 import java.util.List;
 
-@Path("/customers")
-public class CustomerResource {
+@Path("/usuario")
+public class UsuarioResource {
 
     @Inject
-    CustomerService service;
+    UsuarioService service;
 
     @POST
-    public Response create(@Valid CustomerDTO customer) {
+    public Response create(@Valid UsuarioDTO usuario) {
         try {
-            service.create(customer);
+            service.create(usuario);
             return Response.status(Response.Status.CREATED).build();
         } catch (Exception e) {
             return Response.status(422).entity("{ \"msg\": \"" + e.getMessage() + "\"}").build();
@@ -27,15 +25,15 @@ public class CustomerResource {
 
     @GET
     public Response read() {
-        List<CustomerDTO> customers = service.selectAll();
-        return Response.status(Response.Status.OK).entity(customers).build();
+        List<UsuarioDTO> usuarios = service.selectAll();
+        return Response.status(Response.Status.OK).entity(usuarios).build();
     }
 
     @GET
     @Path("/{id}")
     public Response selectById(Long id) {
         try {
-            CustomerDTO customer = service.selectById(id);
+            UsuarioDTO customer = service.selectById(id);
             return Response.status(Response.Status.OK).entity(customer).build();
         } catch (Exception e) {
             return Response.status(Response.Status.NOT_FOUND).entity("{ \"msg\": \"Registro não encontrado\"}").build();
@@ -44,9 +42,9 @@ public class CustomerResource {
 
     @PUT
     @Path("/{id}")
-    public Response updateAll(Long id, @Valid CustomerDTO customer) {
+    public Response updateAll(Long id, @Valid UsuarioDTO usuario) {
         try {
-            service.updateAll(id, customer);
+            service.updateAll(id, usuario);
             String msg = "{ \"msg\": \"SUCESSO\"}";
             return Response.status(Response.Status.OK).entity(msg).build();
         } catch (Exception e) {
@@ -56,8 +54,8 @@ public class CustomerResource {
 
     @PATCH
     @Path("/{id}")
-    public Response updatePartial(Long id, @Valid CustomerDTO customer) {
-        service.updatePartial(id, customer);
+    public Response updatePartial(Long id, @Valid UsuarioDTO usuario) {
+        service.updatePartial(id, usuario);
         String msg = "{ \"msg\": \"SUCESSO\"}";
         return Response.status(Response.Status.OK).entity(msg).build();
     }
