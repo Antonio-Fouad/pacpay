@@ -1,8 +1,10 @@
-package com.picpaysimplificado.customer;
+package com.picpaysimplificado.usuario;
 
 import jakarta.validation.constraints.*;
 
-public record CustomerDTO(
+import java.math.BigDecimal;
+
+public record UsuarioDTO(
         @NotBlank(message = "O nome é obrigatório!")
         String nomeCompleto,
         @Min(value = 18, message = "Idade não permitida!")
@@ -14,6 +16,8 @@ public record CustomerDTO(
         String email,
         @Size(min = 6, max = 10, message = "A senha deve conter no mínimo 6 caracteres e no máximo 10!")
         @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "A senha deve conter apenas letras é números")
-        String senha
+        String senha,
+        BigDecimal Saldo,
+        TipoUsuario tipoUsuario
 ) {
 }

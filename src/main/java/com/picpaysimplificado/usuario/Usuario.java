@@ -1,19 +1,42 @@
-package com.picpaysimplificado.customer;
+package com.picpaysimplificado.usuario;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
-public class Customer {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nomeCompleto;
     private Integer idade;
-    @Column(name = "CPF", unique = true)
+    @Column(name = "cpf", unique = true)
     private String cpf;
+    @Column(name = "email")
     private String email;
     private String senha;
+    private BigDecimal saldo;
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario;
+
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
 
     public Long getId() {
         return id;
